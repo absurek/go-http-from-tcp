@@ -1,0 +1,20 @@
+{
+  "name": "HTTP from TCP in Go",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8080],
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "go.toolsManagement.autoUpdate": true
+      },
+      "extensions": [
+        "golang.go"
+      ]
+    }
+  },
+  "postCreateCommand": "go version"
+}
