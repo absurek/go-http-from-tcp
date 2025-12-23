@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io"
 	"strings"
+
+	"github.com/absurek/go-http-from-tcp/internal/constants"
 )
 
 type Request struct {
@@ -27,11 +29,8 @@ const (
 	requestStateDone
 )
 
-const crlf string = "\r\n"
-const bufferSize int = 8
-
 func RequestFromReader(reader io.Reader) (*Request, error) {
-	buf := make([]byte, bufferSize)
+	buf := make([]byte, constants.BufferSize)
 	readToIndex := 0
 	req := &Request{
 		state: requestStateInitialized,
@@ -66,7 +65,7 @@ func RequestFromReader(reader io.Reader) (*Request, error) {
 }
 
 func parseRequestLine(data []byte) (*RequestLine, int, error) {
-	idx := bytes.Index(data, []byte(crlf))
+	idx := bytes.Index(data, []byte(constants.CRLF))
 	if idx == -1 {
 		return nil, 0, nil
 	}
