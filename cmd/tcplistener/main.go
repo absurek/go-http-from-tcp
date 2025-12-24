@@ -27,6 +27,8 @@ func handleConnection(conn net.Conn) {
 	for key, value := range req.Headers {
 		fmt.Printf("- %s: %s\n", key, value)
 	}
+	fmt.Println("Body:")
+	fmt.Print(string(req.Body))
 	fmt.Println()
 
 	log.Println("Connection closed")
