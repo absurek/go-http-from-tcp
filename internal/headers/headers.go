@@ -31,7 +31,7 @@ func (h Headers) Parse(data []byte) (int, bool, error) {
 		return 0, false, err
 	}
 
-	h.Set(key, value)
+	h.Add(key, value)
 	return idx + 2, false, nil
 }
 
@@ -40,6 +40,10 @@ func (h Headers) Get(key string) string {
 }
 
 func (h Headers) Set(key, value string) {
+	h[key] = value
+}
+
+func (h Headers) Add(key, value string) {
 	key = strings.ToLower(key)
 
 	current, ok := h[key]
