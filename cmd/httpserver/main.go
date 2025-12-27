@@ -86,6 +86,8 @@ func handler(w *response.Writer, req *request.Request) {
 		badRequest(w, req)
 	case "/myproblem":
 		internalServerError(w, req)
+	case "/video":
+		video(w, req)
 	default:
 		statusOk(w, req)
 	}
@@ -163,4 +165,19 @@ func statusOk(w *response.Writer, req *request.Request) {
 
 	w.WriteHeaders(headers)
 	w.WriteBody(res)
+}
+
+func video(w *response.Writer, req *request.Request) {
+	file, err := os.ReadFile("./assets/vim.mp4")
+	if err != nil {
+		internalServerError(w, req)
+		return
+	}
+
+	w.WriteStatusLine(response.StatusOk)
+	headers := response.GetDefaultHeaders(len(file))
+	headers.Set("Content-Type", "video/mp4")
+
+	w.WriteHeaders(headers)
+	w.WriteBody(file)
 }
