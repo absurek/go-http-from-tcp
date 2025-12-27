@@ -40,7 +40,11 @@ func (h Headers) Get(key string) string {
 }
 
 func (h Headers) Set(key, value string) {
-	h[key] = value
+	h[strings.ToLower(key)] = value
+}
+
+func (h Headers) Remove(key string) {
+	delete(h, strings.ToLower(key))
 }
 
 func (h Headers) Add(key, value string) {
