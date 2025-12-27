@@ -7,7 +7,7 @@ ENV GOLANG_VERSION=1.25.5
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl \
-    netcat \
+    netcat-openbsd \
     git \
     jq \
     wget \
